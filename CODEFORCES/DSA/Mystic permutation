@@ -1,0 +1,27 @@
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    p = list(map(int, input().split()))
+
+    if n == 1:
+        print(-1)
+        continue
+
+    unused = list(range(1, n + 1))
+    q = []
+
+    for i in range(n):
+        for x in unused:
+            if x != p[i]:
+                q.append(x)
+                unused.remove(x)
+                break
+        else:
+            # only forbidden number remains
+            q.append(unused.pop())
+
+    if q[-1] == p[-1]:
+        q[-1], q[-2] = q[-2], q[-1]
+
+    print(*q)
